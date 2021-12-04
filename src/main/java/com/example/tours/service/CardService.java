@@ -6,6 +6,7 @@ import com.example.tours.model.User;
 import com.example.tours.repository.CardRepository;
 import org.springframework.beans.CachedIntrospectionResults;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,7 +31,9 @@ public class CardService {
     }
 
     public List<Card> getAll() {
-        return cardRepository.findAllByOrderByNameAsc();
+        User user = userService.getCurrentUser(SecurityContextHolder.getContext().getAuthentication());
+        return user.getCards();
+        //return cardRepository.findAllByOrderByNameAsc();
     }
 
     public void deleteCard(String cardId, String userId) {
