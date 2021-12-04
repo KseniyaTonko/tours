@@ -112,6 +112,7 @@ public class TourController {
     @GetMapping("/tour/{id}")
     public String tourPage(@PathVariable("id") String id, Model model) throws ParseException {
         setModelAttrs(model);
+        addTempMessage(model);
         UsernameDto user = userService.getUsernameResponse(SecurityContextHolder.getContext().getAuthentication());
         if (user != null ) {
             model.addAttribute("profile", userService.getProfile(user.getId().toString()));
@@ -174,10 +175,11 @@ public class TourController {
                           @RequestParam("cardId") String cardId,
                           @RequestParam("tourId") String tourId,
                           @RequestParam("seats") Integer seats, Model model) {
-        String message = tourService.buyTour(userId, cardId, tourId, seats);
-        setTourBuyAttrs(model, message);
-        model.addAttribute("tour", tourService.getTourById(tourId));
-        return "tours/tour";
+//        String message = tourService.buyTour(userId, cardId, tourId, seats);
+//        setTourBuyAttrs(model, message);
+//        model.addAttribute("tour", tourService.getTourById(tourId));
+        tempMessage = tourService.buyTour(userId, cardId, tourId, seats);
+        return "redirect:/tour/" + tourId;
     }
 
     @GetMapping("/my-tours")
@@ -205,10 +207,11 @@ public class TourController {
     public String bookTour(@RequestParam("userId") String userId,
                           @RequestParam("tourId") String tourId,
                           @RequestParam("seats") Integer seats, Model model) throws ParseException {
-        String message = tourService.bookTour(userId, tourId, seats);
-        setTourBuyAttrs(model, message);
-        model.addAttribute("tour", tourService.getTourById(tourId));
-        return "tours/tour";
+//        String message = tourService.bookTour(userId, tourId, seats);
+//        setTourBuyAttrs(model, message);
+//        model.addAttribute("tour", tourService.getTourById(tourId));
+        tempMessage = tourService.bookTour(userId, tourId, seats);
+        return "redirect:/tour/" + tourId;
     }
 
     private void addTempMessage(Model model) {
