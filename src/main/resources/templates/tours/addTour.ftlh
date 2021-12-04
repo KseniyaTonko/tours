@@ -3,8 +3,8 @@
 <@i.page>
 
     <div class="container rounded-top">
-        <div class="row justify-content-center m-5">
-            <div class="col-md-offset-3 col-md-8 text-center">
+        <div class="row justify-content-center m-5 mx-md-0">
+            <div class="col-md-offset-3 col-md-12 col-lg-8 text-center">
                 <div class="m-5">
                     <form action="/add-tour" method="post">
 

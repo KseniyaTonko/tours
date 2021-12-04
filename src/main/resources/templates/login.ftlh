@@ -2,9 +2,20 @@
 
 <@i.page>
 
+    <style>
+        .mar {
+            margin: 20px;
+        }
+        @media only screen and (max-width: 767px) {
+            .mar {
+                margin: 0;
+            }
+        }
+    </style>
+
 
     <div class="container rounded-top">
-        <div class="row justify-content-center m-md-5 mx-xl-0">
+        <div class="row justify-content-center mar">
             <div class="col-md-offset-1 col-md-12 col-lg-6 text-center">
 
                 <div class="form-container col-md-12 col-lg-7">
