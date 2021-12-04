@@ -117,10 +117,14 @@ public class TourService {
         Date now = new Date();
         int noOfDays = 7; //7 days
         Calendar calendar = Calendar.getInstance(Locale.US);
-        calendar.setTime(stringToDate(date));
+        calendar.setTime(now);
         calendar.add(Calendar.DAY_OF_YEAR, noOfDays);
+        Date resultDateNow = calendar.getTime();
+
+        calendar.setTime(stringToDate(date));
         Date resultDate = calendar.getTime();
-        return resultDate.compareTo(now) < 0;
+
+        return resultDateNow.compareTo(resultDate) < 0;
     }
 
     public List<Tour> getTours() {

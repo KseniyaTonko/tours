@@ -123,7 +123,7 @@ public class TourController {
             if (tourService.compareDates(tour.getStartTime(), new Date())) {
                 model.addAttribute("canBuy", true);
             }
-            if (tourService.checkCanBook(tour.getEndDate())) {
+            if (tourService.checkCanBook(tour.getStartTime())) {
                 model.addAttribute("canBook", true);
             }
             return "tours/tour";
