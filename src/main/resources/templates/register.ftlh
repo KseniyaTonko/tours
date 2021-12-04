@@ -5,8 +5,8 @@
     <div class="container rounded-top">
         <div class="row justify-content-center m-5">
             <div class="col-md-offset-1 col-md-12 col-lg-6 text-center">
-                <div class="form-container ">
-                    <form action="/register" method="post" class="form-horizontal rounded form-big">
+                <div class="form-container col-md-12 col-lg-8">
+                    <form action="/register" method="post" class="">
                         <h3 class="heading align-middle"><@spring.message "create.account"/></h3>
                         <#if message??>
                             <div id="divMessage" class="alert alert-danger m-3" role="alert">

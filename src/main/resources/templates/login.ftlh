@@ -7,7 +7,7 @@
         <div class="row justify-content-center m-5">
             <div class="col-md-offset-1 col-md-12 col-lg-6 text-center">
 
-                <div class="form-container">
+                <div class="form-container col-md-12 col-lg-7">
                     <form action="/login" method="post" class="form-horizontal rounded form-big">
                         <h3 class="heading align-middle"><@spring.message "login"/></h3>
                         <#if message??>

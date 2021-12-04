@@ -59,7 +59,7 @@
 
         .form-big {
             background: linear-gradient(240deg, var(--darkest-color), var(--second-dark-color), var(--middle-color));
-            width: 400px;
+            //width: 400px;
         }
         .form-input {
             background: var(--lightest-color);
