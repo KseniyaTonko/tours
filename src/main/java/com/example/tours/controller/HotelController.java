@@ -41,7 +41,7 @@ public class HotelController {
         if (!bindingResult.hasErrors()) {
             hotelService.addHotel(hotel);
         }
-        return "redirect:/tours";
+        return "redirect:/";
     }
 
     @GetMapping("/hotel/{id}")
