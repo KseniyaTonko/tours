@@ -50,12 +50,15 @@
                         <div class="form-group m-3">
                             <label for="exampleInputPassword1"><@spring.message "password"/></label>
                             <input required name="password" type="password" class="form-control form-input" id="exampleInputPassword1"
-                                   placeholder="<@spring.message "password"/>">
+                                   placeholder="<@spring.message "password"/>"
+                                   title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
                         </div>
                         <div class="form-group m-3">
                             <label for="exampleInputPassword2"><@spring.message "password.confirm"/></label>
                             <input required name="passwordConfirm" type="password" class="form-control form-input" id="exampleInputPassword2"
-                                   placeholder="<@spring.message "password.confirm"/>">
+                                   placeholder="<@spring.message "password.confirm"/>"
+                                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
                         </div>
                         <div class="text-start m-3">
                             <a href="/login" class="form-a left"><@spring.message "already.have.acc"/></a>
