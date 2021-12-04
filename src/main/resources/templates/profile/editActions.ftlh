@@ -2,9 +2,9 @@
 
     <div class="col">
         <a href="#" class="nav-link link-dark dropdown-toggle p-0" type="button" id="dropdownOptions"
-           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 20px;">
             <@spring.message "edit"/>
-        </a>
+            </a>
         <div class="dropdown-menu" aria-labelledby="dropdownOptions">
             <form class="row dropdown-item m-0" action="/edit-password" method="get">
                 <input type="hidden" name="userId" value="${profile.getId()}">

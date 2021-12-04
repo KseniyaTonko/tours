@@ -113,7 +113,10 @@
                 ${profile.getLastName()} ${profile.getFirstName()} ${profile.getMiddleName()}
                 <p>${profile.getUsername()}</p>
             </div>
-            <div class="profile-description">
+            <div class="profile-description m-2">
+                <#if user?? && profile.getEmail() == user.getEmail()>
+                    <@edit.editActions user profile></@edit.editActions>
+                </#if>
                 <#if user?? && (user.getIsAdmin() || user.getId() == profile.getId())>
                     <@admin.profileAdminActions user profile></@admin.profileAdminActions>
                     <h6>${profile.getPhone()}</h6>
@@ -123,13 +126,13 @@
         </div>
         <div>
             <!--<div class="row text-center">
-            </div>-->
+            </div>
             <div class="row text-center">
                 <#if user?? && profile.getEmail() == user.getEmail()>
                     <@edit.editActions user profile></@edit.editActions>
                 </#if>
-            </div><br>
-            <div class="row">
+            </div><br>-->
+            <div class="row mb-5">
                 <#if user?? && profile.getEmail() == user.getEmail()>
                     <div class="btn-group" style="left: 0; display: inline-block;" role="group" aria-label="...">
                         <a class="glo-small" href="/cards" style="display: inline-block;">Cards</a>
