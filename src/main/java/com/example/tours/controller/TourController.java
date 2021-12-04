@@ -104,7 +104,8 @@ public class TourController {
     }
 
     @GetMapping("/about")
-    public String about() {
+    public String about(Model model) {
+        setModelAttrs(model);
         return "about";
     }
 
