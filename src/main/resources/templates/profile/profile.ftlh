@@ -97,9 +97,15 @@
             filter: brightness(110%);
         }
 
+        @media only screen and (max-width: 767px) {
+            .marrr {
+                margin: 0;
+            }
+        }
+
     </style>
 
-    <div class="profile-card-4 text-center">
+    <div class="profile-card-4 text-center marrr">
         <#if profile.getImage()??>
             <img src="${profile.getImage()}"
                  class="img img-responsive" alt="avatar">
@@ -117,7 +123,7 @@
                 <#if user?? && profile.getEmail() == user.getEmail()>
                     <@edit.editActions user profile></@edit.editActions>
                 </#if>
-                <#if user?? && (user.getIsAdmin() || user.getId() == profile.getId())>
+                <#if user?? && user.getIsAdmin()>
                     <@admin.profileAdminActions user profile></@admin.profileAdminActions>
                     <h6>${profile.getPhone()}</h6>
                 </#if>

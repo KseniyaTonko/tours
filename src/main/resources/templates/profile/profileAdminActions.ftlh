@@ -10,6 +10,7 @@
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                 <input type="submit" class="btn-options" value="<@spring.message "delete.user"/>"/>
             </form>
+            <#if user?? && (user.getIsAdmin() || user.getId() == profile.getId())>
             <form class="row dropdown-item" action="/lock/${profile.getId()}" method="post">
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                 <#if profile.getStatus() == "BLOCKED">
@@ -29,6 +30,8 @@
                     <input type="submit" class="btn-options" value="<@spring.message "make.user.admin"/>"/>
                 </#if>
             </form>
+            </#if>
+
         </div>
     </div>
 
