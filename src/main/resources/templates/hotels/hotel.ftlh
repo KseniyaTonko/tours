@@ -57,7 +57,6 @@
                         <span class="fa fa-star <#if (hotel.getStarsCount() > 3)>checked</#if>"></span>
                         <span class="fa fa-star <#if (hotel.getStarsCount() > 4)>checked</#if>"></span>
                     </div><br>
-                    <p>Rating: ${hotel.getRating()}</p>
                     <p>Location: ${hotel.getLocation()}</p>
                     <p>Location type: ${hotel.getLocationType()}</p>
                 </div>
