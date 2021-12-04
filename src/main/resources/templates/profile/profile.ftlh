@@ -123,7 +123,7 @@
                 <#if user?? && profile.getEmail() == user.getEmail()>
                     <@edit.editActions user profile></@edit.editActions>
                 </#if>
-                <#if user?? && (user.getIsAdmin() || profile.getEmail() == user.getEmail())>
+                <#if user?? && user.getIsAdmin()>
                     <@admin.profileAdminActions user profile></@admin.profileAdminActions>
                     <h6>${profile.getPhone()}</h6>
                 </#if>
