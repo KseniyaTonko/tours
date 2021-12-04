@@ -14,7 +14,6 @@
     <name>tours</name>
     <description>tours</description>
     <properties>
-        <java.version>11</java.version>
     </properties>
     <dependencies>
         <dependency>
