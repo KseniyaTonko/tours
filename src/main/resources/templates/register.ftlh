@@ -21,22 +21,26 @@
                         <div class="form-group m-3">
                             <label for="exampleInputUsername"><@spring.message "firstName"/></label>
                             <input required name="firstName" type="text" class="form-control form-input" id="exampleInputUsername"
+                                   pattern="^[A-Za-zА-Яа-яЁё]+$"
                                    placeholder="First name"/>
                         </div>
                         <div class="form-group m-3">
                             <label for="exampleInputUsername"><@spring.message "lastName"/></label>
                             <input required name="lastName" type="text" class="form-control form-input" id="exampleInputUsername"
+                                   pattern="^[A-Za-zА-Яа-яЁё]+$"
                                    placeholder="Last Name"/>
                         </div>
                         <div class="form-group m-3">
                             <label for="exampleInputUsername"><@spring.message "middleName"/></label>
                             <input required name="middleName" type="text" class="form-control form-input" id="exampleInputUsername"
+                                   pattern="^[A-Za-zА-Яа-яЁё]+$"
                                    placeholder="Middle Name"/>
                         </div>
                         <div class="form-group m-3">
                             <label for="exampleInputUsername"><@spring.message "phone"/></label>
                             <input required name="phone" type="tel" class="form-control form-input" id="exampleInputUsername"
-                                   placeholder="Phone number"/>
+                                   pattern='\s{0,}\+{1,1}375\s{0,}\({0,1}(([2]{1}([5]{1}|[9]{1}))|([3]{1}[3]{1})|([4]{1}[4]{1}))\)\s{0,}[0-9]{3,3}\s{0,}[0-9]{4,4}'
+                                   placeholder="+375(XX)XXXXXXX"/>
                         </div>
                         <div class="form-group m-3">
                             <label for="exampleInputEmail1"><@spring.message "email"/></label>

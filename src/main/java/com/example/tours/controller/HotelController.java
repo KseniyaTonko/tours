@@ -14,8 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class HotelController {
@@ -28,6 +26,8 @@ public class HotelController {
 
     private void setModelAttrs(Model model) {
         model.addAttribute("user", userService.getUsernameResponse(
+                SecurityContextHolder.getContext().getAuthentication()));
+        model.addAttribute("userFull", userService.getCurrentUser(
                 SecurityContextHolder.getContext().getAuthentication()));
     }
 
@@ -47,8 +47,17 @@ public class HotelController {
     @GetMapping("/hotel/{id}")
     public String hotelPage(@PathVariable("id") String hotelId, Model model) {
         setModelAttrs(model);
-        model.addAttribute("hotel", hotelService.getHotelById(hotelId));
-        return "hotels/hotel";
+        if (hotelService.getHotelById(hotelId) != null) {
+            model.addAttribute("hotel", hotelService.getHotelById(hotelId));
+            if (hotelService.wasInHotel(hotelId)) {
+                model.addAttribute("wasInHotel", true);
+            }
+            hotelService.countReviews(hotelId, model);
+            return "hotels/hotel";
+        }
+        else {
+            return "error";
+        }
     }
 
     @GetMapping("/edit-hotel")

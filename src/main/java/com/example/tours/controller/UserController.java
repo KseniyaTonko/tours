@@ -1,6 +1,10 @@
 package com.example.tours.controller;
 
 import com.example.tours.dto.request.RegisterDto;
+import com.example.tours.dto.response.ProfileDto;
+import com.example.tours.model.User;
+import com.example.tours.repository.UserRepository;
+import com.example.tours.service.TourService;
 import com.example.tours.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,17 +25,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/")
-    public String index(Model model) {
-        userService.setUserToModel(model);
-        return "home";
-    }
+    @Autowired
+    private TourService tourService;
 
-    @GetMapping("/home")
-    public String home(Model model) {
-        userService.setUserToModel(model);
-        return "home";
-    }
 
     @GetMapping("/login")
     public String loginPage(HttpServletRequest request, Model model) {
@@ -130,6 +126,101 @@ public class UserController {
     public String deleteImg(@RequestParam("userId") String userId) throws IOException {
         userService.deleteOldImage(userService.getUserById(userId));
         return "redirect:/profile/" + userId;
+    }
+
+    @GetMapping("/edit-phone")
+    public String editPhonePage(@RequestParam("userId") String id, Model model) {
+        userService.setUserToModel(model);
+        userService.setProfile(model, id);
+        return "profile/editPhone";
+    }
+
+    @PostMapping("/edit-phone")
+    public String editPhone(@RequestParam("phone") String phone,
+                            @RequestParam("password") String password,
+                            @RequestParam("id") String id, Model model) {
+        String message = userService.editPhone(phone, password, id);
+        model.addAttribute("message", message);
+        userService.setUserToModel(model);
+        ProfileDto profile = userService.getProfile(id);
+        if (message.equals("Incorrect password!")) {
+            profile.setPhone(phone);
+        }
+        model.addAttribute("profile", profile);
+        return "profile/editPhone";
+    }
+
+    @GetMapping("/edit-name")
+    public String editNamesPage(@RequestParam("userId") String id, Model model) {
+        userService.setUserToModel(model);
+        userService.setProfile(model, id);
+        return "profile/editNames";
+    }
+
+    @PostMapping("/edit-name")
+    public String editNames(@RequestParam("firstName") String firstName,
+                            @RequestParam("lastName") String lastName,
+                            @RequestParam("middleName") String middleName,
+                            @RequestParam("username") String username,
+                            @RequestParam("password") String password,
+                            @RequestParam("id") String id, Model model) {
+        String message = userService.editNames(username, firstName, lastName, middleName, password, id);
+        model.addAttribute("message", message);
+        userService.setUserToModel(model);
+        ProfileDto profile = userService.getProfile(id);
+        if (message.equals("Incorrect password!")) {
+            profile.setFirstName(firstName);
+            profile.setLastName(lastName);
+            profile.setMiddleName(middleName);
+        }
+        model.addAttribute("profile", profile);
+        return "profile/editNames";
+    }
+
+    @GetMapping("/edit-password")
+    public String editPasswordPage(@RequestParam("userId") String id, Model model) {
+        userService.setUserToModel(model);
+        userService.setProfile(model, id);
+        return "profile/editPassword";
+    }
+
+    @PostMapping("/edit-password")
+    public String editPassword(@RequestParam("oldPassword") String oldPassword,
+                               @RequestParam("newPassword") String newPassword,
+                               @RequestParam("newPasswordConfirm") String newPasswordConfirm,
+                               @RequestParam("id") String id, Model model) {
+        String message = userService.editPassword(oldPassword, newPassword, newPasswordConfirm, id);
+        model.addAttribute("message", message);
+        userService.setUserToModel(model);
+        userService.setProfile(model, id);
+        return "profile/editPassword";
+    }
+
+    @GetMapping("/edit-email")
+    public String editEmailPage(@RequestParam("userId") String id, Model model) {
+        userService.setUserToModel(model);
+        userService.setProfile(model, id);
+        return "profile/editEmail";
+    }
+
+    @PostMapping("/edit-email")
+    public String editEmail(@RequestParam("email") String email,
+                               @RequestParam("password") String password,
+                               @RequestParam("id") String id, Model model) {
+        String message = userService.editEmail(email, password, id);
+        model.addAttribute("message", message);
+        userService.setUserToModel(model);
+        userService.setProfile(model, id);
+        return "profile/editEmail";
+    }
+
+    @GetMapping("/confirm/{userId}/{code}")
+    public String confirmNewEmail(@PathVariable("userId") String userId,
+                           @PathVariable("code") String code,
+                           Model model) {
+        String message = userService.confirmNewEmail(userId, code);
+        model.addAttribute("message", message);
+        return "activate";
     }
 
 }

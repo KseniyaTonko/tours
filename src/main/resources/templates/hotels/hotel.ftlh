@@ -1,5 +1,7 @@
 <#import '../index.ftlh' as i>
 <#import '../hotels/loadHotelImg.ftlh' as img>
+<#import '../review/reviews.ftlh' as rev>
+<#import '../review/addReview.ftlh' as addRev>
 
 <@i.page>
 
@@ -42,7 +44,7 @@
                     <img class="card-img-top" src="${hotel.getImage()}" alt="Holel photo">
                     <!--<img class="col-6" src="{hotel.getImage()}" alt="image"/><br>-->
                 </#if>
-                <div class="card-body little-profile text-center">
+                <div class="card-body little-profile text-center m-2">
                     <h3 class="m-b-0">${hotel.getName()}</h3>
                     <div>
                         <span class="fa fa-star <#if (hotel.getStarsCount() > 0)>checked</#if>"></span>
@@ -58,5 +60,8 @@
             </div>
         </div>
     </div>
-
+    <#if user?? && wasInHotel??>
+        <@addRev.addReview user hotel></@addRev.addReview>
+    </#if>
+    <@rev.reviews hotel></@rev.reviews>
 </@i.page>

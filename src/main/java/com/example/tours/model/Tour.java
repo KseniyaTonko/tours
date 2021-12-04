@@ -10,9 +10,9 @@ import lombok.Setter;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -50,10 +50,10 @@ public class Tour {
     private String lasting;
 
     @NonNull
-    private Date startTime;
+    private String startTime;
 
     @NonNull
-    private Date endDate;
+    private String endDate;
 
     @NonNull
     @Size(max = 30)
@@ -75,6 +75,10 @@ public class Tour {
 
     @NonNull
     private Integer remainingSeats;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JoinColumn(name = "tour_id")
+    private List<Image> images=new ArrayList<>();
 
     public Tour() {
 

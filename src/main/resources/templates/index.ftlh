@@ -22,6 +22,7 @@
             --middle-color: #ef798a;
             --second-dark-color: #d14081;
             --darkest-color: #7e2e84;
+            --background-gray-color: #F1F2F3;
         }
 
         .table [data-sort] {
@@ -35,7 +36,7 @@
         body {
             font-family: 'Macondo', -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Macondo", "Helvetica Neue",
             Arial, sans-serif;
-            background: var(--second-light-color);
+            background-color: var(--background-gray-color);
         }
         nav {
             background:var(--darkest-color);
@@ -68,7 +69,7 @@
             color: black;
         }
         .form-a {
-            color: black;
+            color: var(--darkest-color);
         }
         .form-a:hover {
             color: var(--second-dark-color);
@@ -88,6 +89,75 @@
         .tag:hover {
             color: black;
         }
+
+        .carousel-indicators li {
+            border-radius: 12px;
+            width: 12px;
+            height: 12px;
+            background-color: #404040;
+        }
+        .carousel-indicators li {
+            border-radius: 12px;
+            width: 12px;
+            height: 12px;
+            background-color: #404040;
+        }
+        .carousel-indicators .active {
+            background-color: white;
+            max-width: 12px;
+            margin: 0 3px;
+            height: 12px;
+        }
+        .carousel-control-prev-icon {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
+        }
+
+        .carousel-control-next-icon {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
+
+            flex-direction: column;
+        }
+
+        a.glo{
+            color: var(--darkest-color);
+            padding: 15px 20px;
+            text-transform: uppercase;
+            width: 200px;
+            text-decoration:none;
+            text-align:center;
+            margin:30px 0;
+            display: block;
+            background-image: linear-gradient(to left,transparent,transparent 50%,var(--darkest-color) 50%,var(--darkest-color));
+            background-position: 100% 0;
+            background-size: 200% 100%;
+            transition: all .25s ease-in;
+            font: 400 18px tahoma;
+            border: 1px solid var(--darkest-color);
+        }
+        a.glo:hover {
+            background-position: 0 0;
+            color:#fff;
+        }
+
+        .glo-small{
+            color: var(--darkest-color);
+            padding: 5px 5px;
+            width: auto;
+            text-decoration:none;
+            text-align:center;
+            display: block;
+            background: white;
+            background-image: linear-gradient(to left,transparent,transparent 50%,var(--darkest-color) 50%, var(--darkest-color));
+            background-position: 100% 0;
+            background-size: 200% 100%;
+            transition: all .25s ease-in;
+            border: 1px solid var(--darkest-color);
+        }
+        .glo-small:hover {
+            background-position: 0 0;
+            color:#fff;
+        }
+
     </style>
     <body>
 
@@ -105,13 +175,22 @@
                         <li class="nav-item">
                             <a class="nav-link active" href="/admin"><@spring.message "users"/></a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/bought">Bought</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/booked">Booked</a>
+                        </li>
                     </#if>
-                   <li class="nav-item">
-                       <a class="nav-link active" href="/tours"><@spring.message "home"/></a>
-                   </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="/contacts"><@spring.message "contacts"/></a>
                     </li>
+                   <li class="nav-item">
+                       <a class="nav-link active" href="/about">FAQ</a>
+                   </li>
+                   <li class="nav-item">
+                       <a class="nav-link active" href="/test/1">Test</a>
+                   </li>
                 </ul>
                 <#if user??>
                     <ul class="navbar-nav mb-2 mb-lg-0 justify-content-end">

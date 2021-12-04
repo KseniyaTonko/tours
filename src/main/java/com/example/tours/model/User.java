@@ -8,7 +8,9 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Setter
@@ -25,7 +27,7 @@ public class User {
     private Integer id;
 
     @NotBlank
-    @Size(max = 20)
+    @Size(max = 40)
     @Email
     private String email;
 
@@ -53,7 +55,7 @@ public class User {
 
     private String imagePublicId;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -65,6 +67,21 @@ public class User {
 
     @NotBlank
     private String phone;
+
+    @Email
+    private String newEmail;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "user_card_id")
+    private List<Card> cards=new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "user_tour_id")
+    private List<UsersTour> tours=new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "user_book_tour_id")
+    private List<UsersTour> bookTours=new ArrayList<>();
 
     public User() {
 

@@ -5,8 +5,8 @@
     <!--<link rel="stylesheet" type="text/css" href="/static/css/dropzone.min.css"/>
     <script src="/static/js/dropzone.min.js"></script>-->
 
-    <button class="btn btn-primary" type="button" data-toggle="collapse"
-            data-target="#collapseLoadImage" style="border: 0; color: black">
+    <button class="glo-small text-center" type="button" data-toggle="collapse"
+            data-target="#collapseLoadImage" style="display: inline-block">
         <@spring.message "load.image" />
     </button>
     <div class="collapse" id="collapseLoadImage">
@@ -36,7 +36,7 @@
                 done();
             },
             success: function (file, response) {
-                window.location.replace("http://localhost:8080/profile/"+response);
+                window.location.replace("https://spring-tours.herokuapp.com/profile/"+response);
             }
         };
 

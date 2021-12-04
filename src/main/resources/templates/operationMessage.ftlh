@@ -2,8 +2,10 @@
 
 <@i.page>
     <div>
-        <#if operationMessage??>
-            ${operationMessage}
+        <#if message??>
+            <div class="alert alert-info" role="alert">
+                ${message}
+            </div>
         </#if>
     </div>
 </@i.page>

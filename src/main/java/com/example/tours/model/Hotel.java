@@ -44,7 +44,7 @@ public class Hotel {
 
     private String imagePublicId;
 
-    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     private Set<Tour> tours = new HashSet<>();
 
     public Hotel() {

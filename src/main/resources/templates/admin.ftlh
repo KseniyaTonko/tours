@@ -44,8 +44,8 @@
                             -
                         </#if>
                         </td>
-                    <td><#list user.getRoles() as role>${role.getName()}<#sep>, </#list></td>
-                    <td>${user.getStatus()}</td>
+                    <td><#list user.getRoles() as role><@spring.message '${role.getName()}'/><#sep>, </#list></td>
+                    <td><@spring.message '${user.getStatus()}'/></td>
                 </tr>
             </#list>
             </tbody>

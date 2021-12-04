@@ -1,9 +1,12 @@
 package com.example.tours.dto.response;
 
+import com.example.tours.model.Card;
 import com.example.tours.model.enums.Status;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
 
 @Data
 @RequiredArgsConstructor
@@ -37,4 +40,7 @@ public class ProfileDto {
     private Status Status;
 
     private String image;
+
+    @NonNull
+    private List<Card> cards;
 }

@@ -40,10 +40,10 @@ public class TourDto {
     private String lasting;
 
     @NonNull
-    private Date startTime;
+    private String startTime;
 
     @NonNull
-    private Date endDate;
+    private String endDate;
 
     @NonNull
     @Size(max = 30)

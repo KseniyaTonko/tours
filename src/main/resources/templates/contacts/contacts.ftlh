@@ -36,16 +36,22 @@
                     <#list contacts as contact>
                         <li class="list-group-item">
                             <#if user?? && user.getIsAdmin()>
+
                                 <form action="/edit-contact" method="get" style="display: inline-block;">
                                     <input type="hidden" name="contactId" value="${contact.getId()}">
                                     <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-                                    <input type="submit" class="btn" value="<@spring.message "edit"/>">
+                                    <button type="submit" class="btn">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
                                 </form>
                                 <form action="/delete-contact" method="post" style="display: inline-block;">
                                     <input type="hidden" name="contactId" value="${contact.getId()}">
                                     <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-                                    <input type="submit" class="btn" value="<@spring.message "delete"/>">
+                                    <button type="submit" class="btn">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
                                 </form>
+
                             </#if>
                             <div class="row w-100">
                                 <div class="col-12 col-sm-6 col-md-3 px-0">

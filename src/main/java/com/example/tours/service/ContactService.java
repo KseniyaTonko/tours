@@ -43,7 +43,14 @@ public class ContactService {
     }
 
     public void editContact(Contact contact) {
-        contactRepository.save(contact);
+        Contact oldContact = contactRepository.findById((int) contact.getId());
+        oldContact.setPhone(contact.getPhone());
+        oldContact.setMobileOperator(contact.getMobileOperator());
+        oldContact.setEmail(contact.getEmail());
+        oldContact.setMiddleName(contact.getMiddleName());
+        oldContact.setLastName(contact.getLastName());
+        oldContact.setFirstName(contact.getFirstName());
+        contactRepository.save(oldContact);
     }
 
     // upload image

@@ -161,7 +161,7 @@ public class UserService {
         userRepository.save(user);
 
         mailService.sendActiveMail(new Mail(user.getEmail(), "Account activation", "Link to activate " +
-                "your account: http://localhost:8080/activate/" + user.getId() + "/" + user.getActivationCode()));
+                "your account: https://spring-tours.herokuapp.com/activate/" + user.getId() + "/" + user.getActivationCode()));
 
         return "follow_link";
     }
@@ -170,12 +170,17 @@ public class UserService {
         model.addAttribute("users", userRepository.findAllByOrderByIdAsc());
     }
 
+
     public void setProfile(Model model, String userId) {
+        model.addAttribute("profile", getProfile(userId));
+    }
+
+    public ProfileDto getProfile(String userId) {
         User u = userRepository.findById(Integer.parseInt(userId));
         ProfileDto profileDto = new ProfileDto(u.getUsername(), u.getFirstName(), u.getLastName(), u.getMiddleName(),
-                u.getPhone(), u.getEmail(), u.getId(), isAdmin(u.getRoles()), u.getStatus());
+                u.getPhone(), u.getEmail(), u.getId(), isAdmin(u.getRoles()), u.getStatus(), u.getCards());
         profileDto.setImage(u.getImage());
-        model.addAttribute("profile", profileDto);
+        return profileDto;
     }
 
     public void deleteUser(HttpServletRequest request, HttpServletResponse response, Authentication auth, String id) {
@@ -327,6 +332,82 @@ public class UserService {
         userRepository.save(user);
     }
 
-    // -----------
+    // ----------- edit profile:
 
+    private boolean passwordCorrect(String password, String realPassword) {
+        return encoder().matches(password, realPassword);
+    }
+
+    public String editPhone(String phone, String password, String id) {
+        User user = userRepository.findById(Integer.parseInt(id));
+        if (!passwordCorrect(password, user.getPassword())) {
+            return "Incorrect password!";
+        }
+        user.setPhone(phone);
+        userRepository.save(user);
+        return "Phone successfully changed!";
+    }
+
+    public String editNames(String username, String firstName, String lastName, String middleName, String password, String id) {
+        User user = userRepository.findById(Integer.parseInt(id));
+        if (!passwordCorrect(password, user.getPassword())) {
+            return "Incorrect password!";
+        }
+        user.setUsername(username);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setMiddleName(middleName);
+        userRepository.save(user);
+        return "Name successfully changed!";
+    }
+
+    public String editPassword(String oldPassword, String newPassword, String confirmNewPassword, String id) {
+        User user = userRepository.findById(Integer.parseInt(id));
+        if (!passwordCorrect(oldPassword, user.getPassword())) {
+            return "Incorrect current password!";
+        }
+        if (!newPassword.equals(confirmNewPassword)) {
+            return "New passwords doesn't match!";
+        }
+        user.setPassword(encoder().encode(newPassword));
+        userRepository.save(user);
+        return "Password successfully changed!";
+    }
+
+    public String editEmail(String email, String password, String id) {
+        User user = userRepository.findById(Integer.parseInt(id));
+        if (!passwordCorrect(password, user.getPassword())) {
+            return "Incorrect current password!";
+        }
+        user.setNewEmail(email);
+        user.setActivationCode(UUID.randomUUID().toString());
+        userRepository.save(user);
+
+        mailService.sendActiveMail(new Mail(email, "Confirm new email", "Link to confirm " +
+                "your email: https://spring-tours.herokuapp.com/confirm/" + user.getId() + "/" + user.getActivationCode()));
+
+        return "We sent a link to your new email to confirm it!";
+    }
+
+    public String confirmNewEmail(String id, String code) {
+        if (userRepository.findById(Integer.parseInt(id)) == null) {
+            return "No such user!";
+        }
+        User user = userRepository.findById(Integer.parseInt(id));
+        if (!user.getActivationCode().equals(code)) {
+            return "Incorrect confirmation code!";
+        }
+        if (user.getNewEmail() == null) {
+            return "Email already confirmed!";
+        }
+        user.setActivationCode(null);
+        user.setEmail(user.getNewEmail());
+        user.setNewEmail(null);
+        userRepository.save(user);
+        return "Email successfully changed!";
+    }
+
+    public void saveUser(User user) {
+        userRepository.save(user);
+    }
 }

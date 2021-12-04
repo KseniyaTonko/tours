@@ -36,7 +36,7 @@
                 done();
             },
             success: function (file, response) {
-                window.location.replace("http://localhost:8080/hotel/" + response);
+                window.location.replace("https://spring-tours.herokuapp.com/hotel/" + response);
             }
         };
 
