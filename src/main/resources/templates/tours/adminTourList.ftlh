@@ -29,7 +29,7 @@
                     <tr>
                         <td>${tour.getId()}</td>
                         <td><a class="name" href="/tour/${tour.getTour().getId()}">${tour.getTour().getName()}</a></td>
-                        <td><a class="username" href="/profile/${user.getId()}">${user.getUsername()}</a></td>
+                        <td><a class="username" href="/profile/${tour.getUser().getId()}">${tour.getUser().getUsername()}</a></td>
                         <td style="color: var(--darkest-color);">${tour.getPrice() * tour.getSeats()}</td>
                         <td>${tour.getDate()?string.short}</td>
                     </tr>

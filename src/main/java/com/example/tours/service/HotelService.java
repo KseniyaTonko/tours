@@ -89,8 +89,8 @@ public class HotelService {
             int tourDay = Integer.parseInt(tour.getTour().getEndDate().substring(0, 2));
             int tourMonth = Integer.parseInt(tour.getTour().getEndDate().substring(3, 5));
             int tourYear = Integer.parseInt(tour.getTour().getEndDate().substring(6, 10));
-            if ((tour.getTour().getHotel().getId() == id) && (tourYear >= year) &&
-                    (tourMonth >= month) && (tourDay >= day)){
+            if ((tour.getTour().getHotel().getId() == id) && (tourYear <= year) &&
+                    (tourMonth <= month) && (tourDay <= day)){
                 return true;
             }
         }

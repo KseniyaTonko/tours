@@ -52,7 +52,7 @@
             <div class="col-md-10 col-lg-10">
                 <div class="card mb-3">
                     <div class="card-body" style="color: #666;">
-                        <p>If you don't know what tours do you need, this test can offer some tour type</p>
+                        <p>If you don't know what tours do you need, this test can offer some tour type.</p>
                         <p>Only one answer allowed.</p>
                     </div>
                 </div>
