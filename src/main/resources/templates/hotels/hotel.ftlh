@@ -7,7 +7,11 @@
 
     <style>
         .card-img-top {
-            height: 300px
+            max-height: 300px
+        }
+
+        .img-carousel {
+            max-height: 400px;
         }
 
         .checked {
@@ -41,7 +45,7 @@
             <!-- Column -->
             <div class="card">
                 <#if hotel.getImage()??>
-                    <img class="card-img-top" src="${hotel.getImage()}" alt="Holel photo">
+                    <img class="img-carousel" src="${hotel.getImage()}" alt="Holel photo">
                     <!--<img class="col-6" src="{hotel.getImage()}" alt="image"/><br>-->
                 </#if>
                 <div class="card-body little-profile text-center m-2">
