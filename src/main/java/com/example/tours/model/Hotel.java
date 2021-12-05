@@ -40,10 +40,6 @@ public class Hotel {
     @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
     private Set<Review> reviews = new HashSet<>();
 
-//    private String image;
-//
-//    private String imagePublicId;
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "image_id")
     private Image image;
