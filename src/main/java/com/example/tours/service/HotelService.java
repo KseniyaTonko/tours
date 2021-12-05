@@ -51,10 +51,12 @@ public class HotelService {
     // upload image
 
     public void deleteOldImage(Hotel hotel) throws IOException {
-        if (hotel.getImagePublicId() != null) {
-            imageService.cloudinary.uploader().destroy(hotel.getImagePublicId(), ObjectUtils.emptyMap());
+        if (hotel.getImage() != null) {
+            imageService.cloudinary.uploader().destroy(hotel.getImage().getImagePublicId(), ObjectUtils.emptyMap());
+            Image image = hotel.getImage();
             hotel.setImage(null);
-            hotel.setImagePublicId(null);
+            hotelRepository.save(hotel);
+            imageService.removeImage(image.getId());
         }
         hotelRepository.save(hotel);
     }
@@ -63,8 +65,8 @@ public class HotelService {
         Map uploadResult = imageService.cloudinary.uploader().upload(imageService.getFile(file), ObjectUtils.emptyMap());
         Hotel hotel = hotelRepository.findById(Integer.parseInt(id));
         deleteOldImage(hotel);
-        hotel.setImage(uploadResult.get("secure_url").toString());
-        hotel.setImagePublicId(uploadResult.get("public_id").toString());
+        Image image = new Image(uploadResult.get("secure_url").toString(), uploadResult.get("public_id").toString());
+        hotel.setImage(image);
         hotelRepository.save(hotel);
     }
 

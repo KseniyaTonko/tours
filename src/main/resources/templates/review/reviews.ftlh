@@ -231,7 +231,7 @@
                     <div class="row d-inline-flex">
                         <div class="col-3">
                             <#if review.getUser().getImage()??>
-                                <img class="profile-pic" src="${review.getUser().getImage()}" alt="">
+                                <img class="profile-pic" src="${review.getUser().getImage().getImage()}" alt="">
                             <#else>
                                 <img class="profile-pic" src="https://i.imgur.com/V3ICjlm.jpg" alt="">
                             </#if>

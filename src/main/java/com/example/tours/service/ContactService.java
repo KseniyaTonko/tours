@@ -4,6 +4,7 @@ import com.cloudinary.utils.ObjectUtils;
 import com.example.tours.dto.request.ContactDto;
 import com.example.tours.model.Contact;
 import com.example.tours.model.Hotel;
+import com.example.tours.model.Image;
 import com.example.tours.repository.ContactRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,10 +57,12 @@ public class ContactService {
     // upload image
 
     public void deleteOldImage(Contact contact) throws IOException {
-        if (contact.getImagePublicId() != null) {
-            imageService.cloudinary.uploader().destroy(contact.getImagePublicId(), ObjectUtils.emptyMap());
+        if (contact.getImage() != null) {
+            imageService.cloudinary.uploader().destroy(contact.getImage().getImagePublicId(), ObjectUtils.emptyMap());
+            Image image = contact.getImage();
             contact.setImage(null);
-            contact.setImagePublicId(null);
+            contactRepository.save(contact);
+            imageService.removeImage(image.getId());
         }
         contactRepository.save(contact);
     }
@@ -68,8 +71,8 @@ public class ContactService {
         Map uploadResult = imageService.cloudinary.uploader().upload(imageService.getFile(file), ObjectUtils.emptyMap());
         Contact contact = contactRepository.findById(Integer.parseInt(id));
         deleteOldImage(contact);
-        contact.setImage(uploadResult.get("secure_url").toString());
-        contact.setImagePublicId(uploadResult.get("public_id").toString());
+        Image image = new Image(uploadResult.get("secure_url").toString(), uploadResult.get("public_id").toString());
+        contact.setImage(image);
         contactRepository.save(contact);
     }
 

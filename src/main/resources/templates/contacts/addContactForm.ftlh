@@ -19,19 +19,19 @@
                                        aria-label="Name" aria-describedby="basic-addon1">
                             </div>
                             <div class="input-group mb-3">
-                                    <input maxlength="40" type="text" name="lastName" class="form-control"
+                                    <input required maxlength="40" type="text" name="lastName" class="form-control"
                                            pattern="^[A-Za-zА-Яа-яЁё]+$"
                                            placeholder="<@spring.message "lastName"/>"
                                            aria-label="Tags through a space" aria-describedby="basic-addon1">
                             </div>
                             <div class="input-group mb-3">
-                                    <input maxlength="40" type="text" name="middleName" class="form-control"
+                                    <input required maxlength="40" type="text" name="middleName" class="form-control"
                                            placeholder="<@spring.message "middleName"/>"
                                            pattern="^[A-Za-zА-Яа-яЁё]+$"
                                            aria-label="Tags through a space" aria-describedby="basic-addon1">
                             </div>
                             <div class="input-group mb-3">
-                                    <input maxlength="20" type="text" name="phone" class="form-control"
+                                    <input required maxlength="20" type="text" name="phone" class="form-control"
                                            placeholder="+375(XX)XXXXXXX"
                                            pattern='\s{0,}\+{1,1}375\s{0,}\({0,1}(([2]{1}([5]{1}|[9]{1}))|([3]{1}[3]{1})|([4]{1}[4]{1}))\)\s{0,}[0-9]{3,3}\s{0,}[0-9]{4,4}'
                                            aria-label="Tags through a space" aria-describedby="basic-addon1">

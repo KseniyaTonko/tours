@@ -6,6 +6,7 @@ import com.example.tours.dto.request.RegisterDto;
 import com.example.tours.dto.response.ProfileDto;
 import com.example.tours.dto.response.UsernameDto;
 import com.example.tours.model.Contact;
+import com.example.tours.model.Image;
 import com.example.tours.model.Role;
 import com.example.tours.model.User;
 import com.example.tours.model.enums.ERole;
@@ -179,7 +180,7 @@ public class UserService {
         User u = userRepository.findById(Integer.parseInt(userId));
         ProfileDto profileDto = new ProfileDto(u.getUsername(), u.getFirstName(), u.getLastName(), u.getMiddleName(),
                 u.getPhone(), u.getEmail(), u.getId(), isAdmin(u.getRoles()), u.getStatus(), u.getCards());
-        profileDto.setImage(u.getImage());
+        profileDto.setImage(u.getImage()!=null?u.getImage().getImage():null);
         return profileDto;
     }
 
@@ -315,10 +316,12 @@ public class UserService {
     // upload image
 
     public void deleteOldImage(User user) throws IOException {
-        if (user.getImagePublicId() != null) {
-            imageService.cloudinary.uploader().destroy(user.getImagePublicId(), ObjectUtils.emptyMap());
+        if (user.getImage() != null) {
+            imageService.cloudinary.uploader().destroy(user.getImage().getImagePublicId(), ObjectUtils.emptyMap());
+            Image image = user.getImage();
             user.setImage(null);
-            user.setImagePublicId(null);
+            userRepository.save(user);
+            imageService.removeImage(image.getId());
         }
         userRepository.save(user);
     }
@@ -327,8 +330,8 @@ public class UserService {
         Map uploadResult = imageService.cloudinary.uploader().upload(imageService.getFile(file), ObjectUtils.emptyMap());
         User user = userRepository.findById(Integer.parseInt(id));
         deleteOldImage(user);
-        user.setImage(uploadResult.get("secure_url").toString());
-        user.setImagePublicId(uploadResult.get("public_id").toString());
+        Image image = new Image(uploadResult.get("secure_url").toString(), uploadResult.get("public_id").toString());
+        user.setImage(image);
         userRepository.save(user);
     }
 

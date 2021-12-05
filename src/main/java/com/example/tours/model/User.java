@@ -51,9 +51,13 @@ public class User {
     @Size(max = 40)
     private String middleName;
 
-    private String image;
+//    private String image;
+//
+//    private String imagePublicId;
 
-    private String imagePublicId;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "image_id")
+    private Image image;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",
@@ -82,6 +86,7 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "user_book_tour_id")
     private List<UsersTour> bookTours=new ArrayList<>();
+
 
     public User() {
 

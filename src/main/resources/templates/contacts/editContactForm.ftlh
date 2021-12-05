@@ -9,7 +9,7 @@
                 <div class="col-md-offset-3 col-md-8 text-center">
                     <h2>Edit contact</h2>
                     <#if contact.getImage()??>
-                        <img src="${contact.getImage()}"
+                        <img src="${contact.getImage().getImage()}"
                              alt="Photo" class="rounded-circle mx-auto d-block img-fluid"
                              style="width: 150px; height: 150px;">
                     </#if>

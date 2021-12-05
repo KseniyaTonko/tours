@@ -41,4 +41,12 @@ public class ImageService {
     public Image getById(String id) {
         return imageRepository.findById(Integer.parseInt(id));
     }
+
+    public void removeImage(Integer id) {
+        imageRepository.deleteById(id);
+    }
+
+    public void saveImage(Image image) {
+        imageRepository.save(image);
+    }
 }
