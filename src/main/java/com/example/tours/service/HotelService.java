@@ -91,9 +91,9 @@ public class HotelService {
 
 
         for (UsersTour tour: user.getTours()) {
-            int tourDay = Integer.parseInt(tour.getTour().getEndDate().substring(0, 2));
-            int tourMonth = Integer.parseInt(tour.getTour().getEndDate().substring(3, 5));
-            int tourYear = Integer.parseInt(tour.getTour().getEndDate().substring(6, 10));
+            int tourDay = Integer.parseInt(tour.getTour().getStartTime().substring(0, 2));
+            int tourMonth = Integer.parseInt(tour.getTour().getStartTime().substring(3, 5));
+            int tourYear = Integer.parseInt(tour.getTour().getStartTime().substring(6, 10));
             Calendar endTime = Calendar.getInstance();
             endTime.set(tourYear, tourMonth, tourDay);
             if ((tour.getTour().getHotel().getId() == id) && (now.after(endTime))) {
