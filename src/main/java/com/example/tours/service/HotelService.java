@@ -95,7 +95,7 @@ public class HotelService {
             int tourMonth = Integer.parseInt(tour.getTour().getStartTime().substring(3, 5));
             int tourYear = Integer.parseInt(tour.getTour().getStartTime().substring(6, 10));
             Calendar endTime = Calendar.getInstance();
-            endTime.set(tourYear, tourMonth, tourDay);
+            endTime.set(tourYear, tourMonth - 1, tourDay);
             if ((tour.getTour().getHotel().getId() == id) && (now.after(endTime))) {
                 return true;
             }
