@@ -14,9 +14,6 @@ import java.util.List;
 @Service
 public class QuestionService {
 
-    @Autowired
-    private TourRepository tourRepository;
-
     private final List<Question> questions = new ArrayList<>();
 
 
@@ -36,10 +33,6 @@ public class QuestionService {
             questions.add(question);
         } else {
             questions.set(question.getNumber() - 1, question);
-        }
-
-        if (questions.size() == 10) {
-            int a = 5;
         }
     }
 

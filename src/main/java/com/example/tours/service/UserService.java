@@ -5,7 +5,6 @@ import com.example.tours.dto.Mail;
 import com.example.tours.dto.request.RegisterDto;
 import com.example.tours.dto.response.ProfileDto;
 import com.example.tours.dto.response.UsernameDto;
-import com.example.tours.model.Contact;
 import com.example.tours.model.Image;
 import com.example.tours.model.Role;
 import com.example.tours.model.User;
@@ -243,8 +242,7 @@ public class UserService {
         }
     }
 
-    private void makeAdminAction(HttpServletRequest request, HttpServletResponse response,
-                                 String action, String[] checked, Authentication auth) {
+    private void makeAdminAction(String action, String[] checked) {
         if (action.equals("admin") || action.equals("not admin")) {
             for (String id: checked) {
                 makeAdmin(id, action);
@@ -257,7 +255,7 @@ public class UserService {
                                String action, String[] checked, Authentication auth) {
         deleteAction(request, response, action, checked, auth);
         lockAction(request, response, action, checked, auth);
-        makeAdminAction(request, response, action, checked, auth);
+        makeAdminAction(action, checked);
     }
 
     public void changeUserList(HttpServletRequest request, HttpServletResponse response,

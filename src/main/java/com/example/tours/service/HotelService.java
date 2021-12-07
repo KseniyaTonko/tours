@@ -85,7 +85,7 @@ public class HotelService {
         }
 
         int year = Calendar.getInstance().get(Calendar.YEAR);
-        int month = Calendar.getInstance().get(Calendar.MONTH);
+        int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
         int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
         for (UsersTour tour: user.getTours()) {
             int tourDay = Integer.parseInt(tour.getTour().getEndDate().substring(0, 2));
