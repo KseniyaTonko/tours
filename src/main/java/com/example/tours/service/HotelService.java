@@ -84,15 +84,19 @@ public class HotelService {
             return false;
         }
 
-        int year = Calendar.getInstance().get(Calendar.YEAR);
-        int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
-        int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+//        int year = Calendar.getInstance().get(Calendar.YEAR);
+//        int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
+//        int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+        Calendar now = Calendar.getInstance();
+
+
         for (UsersTour tour: user.getTours()) {
             int tourDay = Integer.parseInt(tour.getTour().getEndDate().substring(0, 2));
             int tourMonth = Integer.parseInt(tour.getTour().getEndDate().substring(3, 5));
             int tourYear = Integer.parseInt(tour.getTour().getEndDate().substring(6, 10));
-            if ((tour.getTour().getHotel().getId() == id) && (tourYear <= year) &&
-                    (tourMonth <= month) && (tourDay <= day)){
+            Calendar endTime = Calendar.getInstance();
+            endTime.set(tourYear, tourMonth, tourDay);
+            if ((tour.getTour().getHotel().getId() == id) && (now.after(endTime))) {
                 return true;
             }
         }
